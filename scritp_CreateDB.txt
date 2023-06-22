@@ -1,0 +1,86 @@
+
+create database Personnel_management;
+use Personnel_management;
+
+DROP TABLE IF EXISTS IdType;
+DROP TABLE IF EXISTS Gender;
+DROP TABLE IF EXISTS MaritalStatus;
+DROP TABLE IF EXISTS Rol;
+DROP TABLE IF EXISTS University;
+DROP TABLE IF EXISTS StudyLevel;
+DROP TABLE IF EXISTS StudyTitle;
+DROP TABLE IF EXISTS Family;
+DROP TABLE IF EXISTS employee;
+DROP TABLE IF EXISTS AcademicInformation;
+
+
+CREATE TABLE IdType (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+name VARCHAR(25) NOT NULL);
+
+CREATE TABLE Gender (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+name VARCHAR(25) NOT NULL);
+
+CREATE TABLE MaritalStatus (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+name VARCHAR(25) NOT NULL);
+
+CREATE TABLE Rol (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+name VARCHAR(25) NOT NULL);
+
+CREATE TABLE University (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+name VARCHAR(25) NOT NULL);
+
+CREATE TABLE StudyLevel (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+name VARCHAR(25) NOT NULL);
+
+CREATE TABLE StudyTitle (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+name VARCHAR(25) NOT NULL);
+
+CREATE TABLE Family (
+identificationCard VARCHAR(25) PRIMARY KEY NOT NULL,
+identificationType INT NOT NULL,
+name1 VARCHAR(25) NOT NULL,
+name2 VARCHAR(25) NOT NULL,
+surname1 VARCHAR(25) NOT NULL,
+surname2 VARCHAR(25) NOT NULL,
+idEmployee INT NOT NULL,
+idGender INT NOT NULL,
+rol INT);
+
+CREATE TABLE employee (
+numberID INT PRIMARY KEY NOT NULL,
+idType INT NOT NULL,
+name1 VARCHAR(25) NOT NULL,
+name2 VARCHAR(25) NOT NULL,
+surname1 VARCHAR(25) NOT NULL,
+surname2 VARCHAR(25) NOT NULL,
+idMaritalStatus INT NOT NULL,
+idGender INT NOT NULL,
+address VARCHAR(50) NOT NULL,
+phone VARCHAR(25) NOT NULL,
+birthDate DATE);
+
+CREATE TABLE AcademicInformation (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+idEmployee INT NOT NULL,
+idUniversity INT,
+idStudyLevel INT NOT NULL,
+idStudyTitle INT);
+
+ALTER TABLE Family ADD CONSTRAINT Family_identificationType_IdType_id FOREIGN KEY (identificationType) REFERENCES IdType(id);
+ALTER TABLE Family ADD CONSTRAINT Family_idEmployee_employee_numberID FOREIGN KEY (idEmployee) REFERENCES employee(numberID);
+ALTER TABLE Family ADD CONSTRAINT Family_idGender_Gender_id FOREIGN KEY (idGender) REFERENCES Gender(id);
+ALTER TABLE Family ADD CONSTRAINT Family_rol_Rol_id FOREIGN KEY (rol) REFERENCES Rol(id);
+ALTER TABLE employee ADD CONSTRAINT employee_idType_IdType_id FOREIGN KEY (idType) REFERENCES IdType(id);
+ALTER TABLE employee ADD CONSTRAINT employee_idMaritalStatus_MaritalStatus_id FOREIGN KEY (idMaritalStatus) REFERENCES MaritalStatus(id);
+ALTER TABLE employee ADD CONSTRAINT employee_idGender_Gender_id FOREIGN KEY (idGender) REFERENCES Gender(id);
+ALTER TABLE AcademicInformation ADD CONSTRAINT AcademicInformation_idEmployee_employee_numberID FOREIGN KEY (idEmployee) REFERENCES employee(numberID);
+ALTER TABLE AcademicInformation ADD CONSTRAINT AcademicInformation_idUniversity_University_id FOREIGN KEY (idUniversity) REFERENCES University(id);
+ALTER TABLE AcademicInformation ADD CONSTRAINT AcademicInformation_idStudyLevel_StudyLevel_id FOREIGN KEY (idStudyLevel) REFERENCES StudyLevel(id);
+ALTER TABLE AcademicInformation ADD CONSTRAINT AcademicInformation_idStudyTitle_StudyTitle_id FOREIGN KEY (idStudyTitle) REFERENCES StudyTitle(id);

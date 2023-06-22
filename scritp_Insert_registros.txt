@@ -1,0 +1,28 @@
+
+use personnel_management;
+
+USE personnel_management
+
+INSERT INTO `university`( `name`) VALUES ("UNAD"), ("UNAL"), ("U Caldas"), ("Javeriana");
+
+INSERT INTO `studylevel`(`id`, `name`) VALUES (0,"Pregrado"), (1,"Posgrado"), (2,"Tecnico"), (3,"Doctorado");
+
+INSERT INTO `studytitle`(`id`, `name`) VALUES (0,"Ing. Industrial"), (1,"Contaduria"), (2,"Ing. Sistemas"), (3,"Ph. Administracion");
+
+INSERT INTO `gender`(`id`, `name`) VALUES (0,"Femenino"), (1,"Masculino");
+
+INSERT INTO `maritalstatus`(`id`, `name`) VALUES (0,"Casado"), (1,"Divorciado"), (2,"Soltero"), (3,"Union Libre");
+
+INSERT INTO `idtype`(`id`, `name`) VALUES (0,"Cedula"), (1,"Pasaporte"), (2,"Nit"), (3,"Registro Civil");
+
+INSERT INTO `rol`(`id`, `name`) VALUES (0,"Pareja"), (1,"Hermano"), (2,"Padre"), (3,"Madre");
+
+insert into employee (numberID,idType,name1,name2,surname1,surname2,idMaritalStatus,idGender,address,phone,birthDate) 
+values(12321,1,"Andres","Arturo","Cundumi","Velez",2,1,"calle 1 cra 12","3213243","2010-01-15"),
+(232323,0,"Mateo","Marcos","Mendez","Rios",1,1,"carrera 21","31332439","1998-03-23"),
+(768798,3,"Sara","Maria","Torres","Sanchez",0,0,"carrera 13-20","300326789","2005-06-02");
+
+INSERT INTO `academicinformation`(`id`, `idEmployee`,`idStudyLevel`, `idStudyTitle`, `idUniversity`) VALUES (4,12321,2,3,0), (1,232323,2,0,3), (2,768798,0,1,2);
+
+INSERT INTO `family`(`identificationCard`, `identificationType`, `name1`, `name2`, `surname1`, `surname2`, `idEmployee`, `idGender`, `rol`) VALUES (100212,0,'Sara','Sofia','Mendes','Ramirez',232323,0,1),
+(100532123,0,'Carlos','Mario','Sosa','Rodriguez',768798,1,1);
